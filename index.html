@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkyCast Weather App</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <script src="weather.js" defer></script>
+</head>
+<body>
+  <main class="weather-app" data-theme="clear">
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">SC</span>
+        <div>
+          <p>SkyCast</p>
+          <span>Live weather dashboard</span>
+        </div>
+      </div>
+
+      <div class="unit-toggle" role="group" aria-label="Temperature unit">
+        <button class="unit-option is-active" type="button" data-unit="celsius">&deg;C</button>
+        <button class="unit-option" type="button" data-unit="fahrenheit">&deg;F</button>
+      </div>
+    </header>
+
+    <form class="search-form" id="searchForm">
+      <label class="sr-only" for="cityInput">City name</label>
+      <div class="search-field">
+        <i data-lucide="search" aria-hidden="true"></i>
+        <input id="cityInput" name="city" type="search" placeholder="Search a city" autocomplete="off">
+      </div>
+      <button class="primary-button" type="submit">
+        <i data-lucide="cloud-sun" aria-hidden="true"></i>
+        <span>Check</span>
+      </button>
+      <button class="icon-button" id="locationButton" type="button" aria-label="Use current location" data-tooltip="My location">
+        <i data-lucide="map-pin" aria-hidden="true"></i>
+      </button>
+    </form>
+
+    <p class="status" id="statusMessage" role="status" hidden></p>
+
+    <section class="dashboard-grid" aria-label="Weather dashboard">
+      <section class="current-panel">
+        <div class="weather-art" aria-hidden="true">
+          <span class="sun-disc"></span>
+          <span class="cloud cloud-one"></span>
+          <span class="cloud cloud-two"></span>
+          <span class="rain rain-one"></span>
+          <span class="rain rain-two"></span>
+          <span class="rain rain-three"></span>
+          <span class="snow snow-one"></span>
+          <span class="snow snow-two"></span>
+          <span class="bolt"></span>
+        </div>
+
+        <div class="panel-kicker">
+          <span>Current weather</span>
+          <time id="localTime">--</time>
+        </div>
+
+        <div class="current-main">
+          <div>
+            <h1 id="cityName">--</h1>
+            <p id="conditionText">--</p>
+          </div>
+
+          <div class="temperature-lockup">
+            <span id="temperatureValue">--</span>
+            <span id="temperatureUnit">&deg;C</span>
+          </div>
+        </div>
+
+        <div class="summary-strip">
+          <div>
+            <span>Feels</span>
+            <strong id="feelsLike">--</strong>
+          </div>
+          <div>
+            <span>Humidity</span>
+            <strong id="humidity">--</strong>
+          </div>
+          <div>
+            <span>Wind</span>
+            <strong id="windSpeed">--</strong>
+          </div>
+        </div>
+      </section>
+
+      <aside class="side-panel" aria-label="Weather details">
+        <div class="detail-card">
+          <span class="detail-icon"><i data-lucide="umbrella" aria-hidden="true"></i></span>
+          <div>
+            <p>Rain chance</p>
+            <strong id="rainChance">--</strong>
+          </div>
+        </div>
+        <div class="detail-card">
+          <span class="detail-icon"><i data-lucide="navigation" aria-hidden="true"></i></span>
+          <div>
+            <p>Wind direction</p>
+            <strong id="windDirection">--</strong>
+          </div>
+        </div>
+        <div class="detail-card">
+          <span class="detail-icon"><i data-lucide="sunrise" aria-hidden="true"></i></span>
+          <div>
+            <p>Sunrise</p>
+            <strong id="sunriseTime">--</strong>
+          </div>
+        </div>
+        <div class="detail-card">
+          <span class="detail-icon"><i data-lucide="sunset" aria-hidden="true"></i></span>
+          <div>
+            <p>Sunset</p>
+            <strong id="sunsetTime">--</strong>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="forecast-panel" aria-labelledby="hourlyTitle">
+      <div class="section-heading">
+        <h2 id="hourlyTitle">Next hours</h2>
+        <span id="updatedAt">--</span>
+      </div>
+      <div class="hourly-list" id="hourlyForecast"></div>
+    </section>
+
+    <section class="bottom-grid">
+      <section class="forecast-panel" aria-labelledby="dailyTitle">
+        <div class="section-heading">
+          <h2 id="dailyTitle">7-day outlook</h2>
+        </div>
+        <div class="daily-list" id="dailyForecast"></div>
+      </section>
+
+      <section class="forecast-panel" aria-labelledby="recentTitle">
+        <div class="section-heading">
+          <h2 id="recentTitle">Recent searches</h2>
+        </div>
+        <div class="recent-list" id="recentSearches"></div>
+      </section>
+    </section>
+
+    <footer class="app-footer">
+      <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Weather data by Open-Meteo</a>
+    </footer>
+  </main>
+</body>
+</html>
